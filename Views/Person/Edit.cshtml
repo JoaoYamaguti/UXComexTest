@@ -16,22 +16,23 @@
     <form id="formPerson" asp-action="Edit">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="person.Id" />
-        <div class="form-group mb-3">
+        <div class="form-group">
             <label asp-for="person.Name" class="control-label"></label>
             <input asp-for="person.Name" class="form-control" />
             <span asp-validation-for="person.Name" class="text-danger"></span>
         </div>
-        <div class="form-group mb-3">
+        <div class="form-group">
             <label asp-for="person.PhoneNumber" class="control-label"></label>
             <input asp-for="person.PhoneNumber" class="form-control" id="phoneNumber" />
             <span asp-validation-for="person.PhoneNumber" class="text-danger"></span>
         </div>
-        <div class="form-group mb-3">
+        <div class="form-group">
             <label asp-for="person.CPF" class="control-label"></label>
             <input asp-for="person.CPF" class="form-control" id="CPF" />
             <span asp-validation-for="person.CPF" class="text-danger"></span>
         </div>
-        <div class="form-group text-end mb-3">
+        <div class="btns form-group">
+            <a type="button" class="btnClose" asp-action="Index">Voltar</a>
             <button id="subEditPerson" type="submit" value="Save" class="btnConfirme">Save</button>
         </div>
     </form>
@@ -97,10 +98,9 @@
                 <hr />
             </header>
 
-            <form id="formAddress" asp-controller="Address" asp-action="Create" asp-route-id="@Model.person.Id"
-                class="p-4">
+            <form id="formAddress" asp-controller="Address" asp-action="Create" asp-route-id="@Model.person.Id">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group mb-3">
+                <div class="form-group">
                     <label asp-for="address.CEP" class="control-label"></label>
                     <div class=" cepField">
                         <input asp-for="address.CEP" class="form-control" id="cep" />
@@ -108,22 +108,22 @@
                     </div>
                     <span asp-validation-for="address.CEP" class="text-danger"></span>
                 </div>
-                <div class="form-group mb-3">
+                <div class="form-group">
                     <label asp-for="address.Name" class="control-label"></label>
                     <input asp-for="address.Name" class="form-control" id="name" />
                     <span asp-validation-for="address.Name" class="text-danger"></span>
                 </div>
-                <div class="form-group mb-3">
+                <div class="form-group">
                     <label asp-for="address.City" class="control-label"></label>
                     <input asp-for="address.City" class="form-control" id="city" />
                     <span asp-validation-for="address.City" class="text-danger"></span>
                 </div>
-                <div class="form-group mb-3">
+                <div class="form-group">
                     <label asp-for="address.State" class="control-label"></label>
                     <input asp-for="address.State" class="form-control" id="state" />
                     <span asp-validation-for="address.State" class="text-danger"></span>
                 </div>
-                <div class="form-group text-end">
+                <div class="btns form-group">
                     <button type="button" class="btnClose" data-bs-dismiss="modal">Fechar</button>
                     <button type="submit" class="btnConfirme" value="Create">Cadastrar</button>
                 </div>

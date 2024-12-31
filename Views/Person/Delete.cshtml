@@ -6,7 +6,7 @@
 <section class="deletePage">
     <header class="breadcrumbNav">
         <nav>
-            <a asp-action="Index">Pessoas</a>
+            <a asp-controller="Person" asp-action="Index">Pessoas</a>
             <i class="bi bi-chevron-compact-right text-secondary"></i>
             Excluir
         </nav>
@@ -36,9 +36,11 @@
             </dd>
         </dl>
 
-        <form asp-action="Delete" class="text-end">
-            <button type="button" class="btnClose">Voltar</button>
-            <input type="submit" value="Delete" class="btnDelete" />
+        <form asp-action="Delete">
+            <div class="btns">
+                <a type="button" class="btnClose" asp-action="Index">Voltar</a>
+                <input type="submit" value="Excluir" class="btnDelete" />
+            </div>
         </form>
     </div>
 </section>

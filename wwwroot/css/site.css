@@ -44,7 +44,7 @@ body {
   margin: auto;
   border: solid 2px var(--white);
   border-radius: 2rem;
-  padding: 2rem;
+  padding: 3rem;
 
   display: flex;
   flex-flow: column nowrap;
@@ -116,6 +116,7 @@ body {
 
 .editPerson {
   inline-size: 80%;
+  block-size: 100%;
 
   margin: auto;
 
@@ -124,6 +125,25 @@ body {
   justify-content: space-between;
   gap: 1rem;
 
+  & #formAddress {
+    margin: auto;
+  }
+}
+
+.editAddress {
+  inline-size: 80%;
+  block-size: 100%;
+
+  margin: auto;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  gap: 1rem;
+
+  & #formAddress {
+    margin: auto;
+  }
 }
 
 .deletePage {
@@ -141,6 +161,20 @@ body {
     max-inline-size: 30rem;
 
     margin: auto;
+    border: solid 2px var(--white);
+    border-radius: 2rem;
+    padding: 2rem;
+  }
+
+  & form {
+    inline-size: 100%;
+
+    & .btns {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+    }
+
   }
 }
 
@@ -258,10 +292,9 @@ body {
     justify-content: center;
     gap: 1rem;
 
-    #formPerson{
+    #formPerson {
       margin: auto;
     }
-
   }
 
   .deletePerson {
@@ -273,6 +306,10 @@ body {
 #formAddress {
   inline-size: 20rem;
 
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  gap: 1rem;
 
   & label {
     font-weight: 700;
@@ -307,6 +344,13 @@ body {
       background-color: #372ea1;
       color: var(--white);
     }
+  }
+
+  .btns {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
   }
 }
 
@@ -421,8 +465,17 @@ body {
 }
 
 .modal-content {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  gap: 1rem;
+
   background-color: var(--black);
-  padding: 0 5% 0 5%;
+  padding: 0 5% 5% 5%;
+
+  & #formAddress {
+    margin: auto;
+  }
 }
 
 .modal-header {

@@ -8,16 +8,16 @@
 
     <header class="breadcrumbNav">
         <nav>
-            <a asp-action="Index">Endereço</a>
+            <span>Endereço</span>
             <i class="bi bi-chevron-compact-right text-secondary"></i>
-            Cadastro
+            Excluir
         </nav>
         <hr />
     </header>
-    
+
     <div class="content">
         <h4>Você tem certeza que quer deletar esse endereço?</h4>
-    
+
         <dl class="row">
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Name)
@@ -44,9 +44,12 @@
                 @Html.DisplayFor(model => model.CEP)
             </dd>
         </dl>
-    
-        <form asp-action="Delete" class="text-end">
-            <input type="submit" value="Delete" class="btn btn-danger" />
+
+        <form asp-action="Delete">
+            <div class="btns">
+                <a type="button" class="btnClose" asp-controller="Person" asp-action="Edit" asp-route-id="@Model.PersonId">Voltar</a>
+                <input type="submit" value="Excluir" class="btnDelete" />
+            </div>
         </form>
     </div>
 </section>

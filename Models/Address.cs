@@ -6,7 +6,7 @@ namespace UxcomexTest.Models;
 public class Address
 {
     public int Id { get; set; }
-    [StringLength(50)]
+    [StringLength(100)]
     [Required]
     [Display(Name = "Endereço")]
     public required string Name { get; set; }
