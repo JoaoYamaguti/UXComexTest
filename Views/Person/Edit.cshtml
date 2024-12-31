@@ -4,16 +4,14 @@
     ViewData["Title"] = "Edit";
 }
 <section class="editPerson">
-
-    <h1 class="breadcrumbNav">
-        <a asp-action="Index">Listagem de Pessoas</a>
-        <i class="bi bi-chevron-compact-right text-secondary"></i>
-        <span>Pessoa</span>
-        <i class="bi bi-chevron-compact-right text-secondary"></i>
-        Edição
-    </h1>
-
-    <hr />
+    <header class="breadcrumbNav">
+        <nav>
+            <a asp-action="Index">Pessoas</a>
+            <i class="bi bi-chevron-compact-right text-secondary"></i>
+            Edição
+        </nav>
+        <hr />
+    </header>
 
     <form id="formPerson" asp-action="Edit">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -37,12 +35,13 @@
             <button id="subEditPerson" type="submit" value="Save" class="btnConfirme">Save</button>
         </div>
     </form>
+
     <hr>
 
     <!-- Button trigger modal -->
-        <button type="button" class="btnPage" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            +Endereço
-        </button>
+    <button type="button" class="btnPage" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        +Endereço
+    </button>
 
     @if (Model.person.Addresses != null)
     {
@@ -61,17 +60,17 @@
                 @foreach (var address in Model.person.Addresses)
                 {
                     <tr>
-                        <td>@address.Name</td>
-                        <td>@address.City</td>
-                        <td>@address.State</td>
-                        <td>@address.CEP</td>
-                        <td>
+                        <td data-title="@Html.DisplayNameFor(model => model.address.Name)">@address.Name</td>
+                        <td data-title="@Html.DisplayNameFor(model => model.address.City)">@address.City</td>
+                        <td data-title="@Html.DisplayNameFor(model => model.address.State)">@address.State</td>
+                        <td data-title="@Html.DisplayNameFor(model => model.address.CEP)">@address.CEP</td>
+                        <td data-title="Editar">
                             <a asp-controller="Address" asp-action="Edit" asp-route-id="@address.Id"
                                 class="editLink text-decoration-none">
                                 <i class="bi bi-pencil-fill fs-5"></i>
                             </a>
                         </td>
-                        <td>
+                        <td data-title="Excluir">
                             <a asp-controller="Address" asp-action="Delete" asp-route-id="@address.Id"
                                 class="deleteLink text-decoration-none">
                                 <i class="bi bi-x-lg fs-5"></i>
@@ -89,22 +88,23 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="breadcrumbNav">
+            <header class="breadcrumbNav">
+                <nav>
                     <span>Endereço</span>
                     <i class="bi bi-chevron-compact-right text-secondary"></i>
                     Cadastro
-                </h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+                </nav>
+                <hr />
+            </header>
+
             <form id="formAddress" asp-controller="Address" asp-action="Create" asp-route-id="@Model.person.Id"
                 class="p-4">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group mb-3">
                     <label asp-for="address.CEP" class="control-label"></label>
-                    <div class="d-flex flex-row">
+                    <div class=" cepField">
                         <input asp-for="address.CEP" class="form-control" id="cep" />
-                        <button type="button" class="btn btn-primary" id="cepSearch">Procurar</button>
+                        <button type="button" id="cepSearch">Procurar</button>
                     </div>
                     <span asp-validation-for="address.CEP" class="text-danger"></span>
                 </div>
@@ -124,7 +124,8 @@
                     <span asp-validation-for="address.State" class="text-danger"></span>
                 </div>
                 <div class="form-group text-end">
-                    <button type="submit" class="btn btn-primary" value="Create">Create</button>
+                    <button type="button" class="btnClose" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btnConfirme" value="Create">Cadastrar</button>
                 </div>
             </form>
         </div>

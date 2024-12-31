@@ -4,57 +4,61 @@
     ViewData["Title"] = "Persons";
 }
 <section class="indexPerson">
-    <h1 class="breadcrumbNav">
-        Listagem de Pessoas
-    </h1>
+    <header class="breadcrumbNav">
+        <nav>
+            Pessoas
+        </nav>
+        <hr />
+    </header>
 
-    <hr>
 
+
+    <div class="content">
     <a asp-action="Create" class="btnPage">+ Cadastro</a>
-
-    <div class="tb">
-        <table class="excel table-hover">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.PhoneNumber)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CPF)
-                    </th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
+        <div class="table-responsive">
+            <table class="excel">
+                <thead>
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td id="telefone">
-                            @Html.DisplayFor(modelItem => item.PhoneNumber)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CPF)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id" class="editLink text-decoration-none">
-                                <i class="bi bi-pencil-fill fs-5"></i>
-                            </a>
-                        </td>
-                        <td>
-                            <a asp-action="Delete" asp-route-id="@item.Id" class="deleteLink text-decoration-none">
-                                <i class="bi bi-x-lg fs-5"></i>
-                            </a>
-                        </td>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PhoneNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CPF)
+                        </th>
+                        <th></th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td data-title="@Html.DisplayNameFor(model => model.Name)">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td data-title="@Html.DisplayNameFor(model => model.PhoneNumber)">
+                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                            </td>
+                            <td data-title="@Html.DisplayNameFor(model => model.Name)">
+                                @Html.DisplayFor(modelItem => item.CPF)
+                            </td>
+                            <td data-title="Editar">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="editLink text-decoration-none">
+                                    <i class="bi bi-pencil-fill fs-5"></i>
+                                </a>
+                            </td>
+                            <td data-title="Excluir">
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="deleteLink text-decoration-none">
+                                    <i class="bi bi-x-lg fs-5"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </section>

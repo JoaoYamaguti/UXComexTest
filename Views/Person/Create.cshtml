@@ -3,39 +3,41 @@
 @{
     ViewData["Title"] = "Create";
 }
-<section class="createPerson">
+<section class=" createPerson">
+    <header class="breadcrumbNav">
+        <nav>
+            <a asp-action="Index">Pessoas</a>
+            <i class="bi bi-chevron-compact-right text-secondary"></i>
+            Cadastro
+        </nav>
+        <hr />
+    </header>
 
-    <h1 class="breadcrumbNav">
-        <a asp-action="Index">Listagem de Pessoas</a>
-        <i class="bi bi-chevron-compact-right text-secondary"></i>
-        <span>Pessoa</span>
-        <i class="bi bi-chevron-compact-right text-secondary"></i>
-        Cadastro
-    </h1>
+    @* <div class="content"> *@
+        <form id="formPerson" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mb-3">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" id="phoneNumber" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="CPF" class="control-label"></label>
+                <input asp-for="CPF" class="form-control" id="CPF" />
+                <span asp-validation-for="CPF" class="text-danger"></span>
+            </div>
+            <div class="form-group text-end">
+                <button type="submit" class="btnConfirme">Cadastrar</button>
+            </div>
+        </form>
+    @* </div> *@
 
-    <hr />
 
-    <form id="formPerson" asp-action="Create">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group mb-3">
-            <label asp-for="Name" class="control-label"></label>
-            <input asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
-        </div>
-        <div class="form-group mb-3">
-            <label asp-for="PhoneNumber" class="control-label"></label>
-            <input asp-for="PhoneNumber" class="form-control" id="phoneNumber" />
-            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-        </div>
-        <div class="form-group mb-3">
-            <label asp-for="CPF" class="control-label"></label>
-            <input asp-for="CPF" class="form-control" id="CPF" />
-            <span asp-validation-for="CPF" class="text-danger"></span>
-        </div>
-        <div class="form-group text-end">
-            <button type="submit" class="btnConfirme">Cadastrar</button>
-        </div>
-    </form>
 </section>
 
 @section Scripts {
