@@ -110,23 +110,11 @@ namespace UxcomexTest.Controllers
         {
             var connection = new SqlConnection(_connectionString);
 
-            try
-            {
-                var searchSql = "SELECT * FROM Person WHERE Person.CPF = @CPF";
-                var personFound = await connection.QuerySingleAsync<Person>(searchSql, new { person.CPF });
+                var sql = "UPDATE Person SET Name = @Name, PhoneNumber = @PhoneNumber OUTPUT INSERTED.Id WHERE Person.Id = @Id";
 
-                return RedirectToAction(nameof(Edit), new { id });
-            }
-            catch (System.Exception)
-            {
-                var sql = "UPDATE Person SET Name = @Name, PhoneNumber = @PhoneNumber, CPF = @CPF OUTPUT INSERTED.Id WHERE Person.Id = @Id";
-
-                var newInfos = await connection.QuerySingleAsync<Person>(sql, new { person.Name, person.PhoneNumber, person.CPF, id });
+                var newInfos = await connection.QuerySingleAsync<Person>(sql, new { person.Name, person.PhoneNumber, id });
 
                 return RedirectToAction(nameof(Index));
-
-                throw;
-            }
         }
 
         // GET: Person/Delete/5
