@@ -13,33 +13,51 @@
         <hr />
     </header>
 
-    @* <div class="content"> *@
-        <form id="formPerson" asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" id="phoneNumber" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group ">
-                <label asp-for="CPF" class="control-label"></label>
-                <input asp-for="CPF" class="form-control" id="CPF" />
-                <span asp-validation-for="CPF" class="text-danger"></span>
-            </div>
-            <div class="btns form-group">
-                <a type="button" class="btnClose" asp-action="Index">Voltar</a>
-                <button type="submit" class="btnConfirme">Cadastrar</button>
-            </div>
-        </form>
-    @* </div> *@
-
+    <form id="formPerson" asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PhoneNumber" class="control-label"></label>
+            <input asp-for="PhoneNumber" class="form-control" id="phoneNumber" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="form-group ">
+            <label asp-for="CPF" class="control-label"></label>
+            <input asp-for="CPF" class="form-control" id="CPF" />
+            <span asp-validation-for="CPF" class="text-danger"></span>
+        </div>
+        <div class="btns form-group">
+            <a type="button" class="btnClose" asp-action="Index">Voltar</a>
+            <button type="submit" class="btnConfirme">Cadastrar</button>
+        </div>
+    </form>
 
 </section>
+
+@if (Model.CPF != "")
+{
+    <div class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
 
 @section Scripts {
     @{

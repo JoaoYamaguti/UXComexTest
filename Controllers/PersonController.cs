@@ -25,7 +25,9 @@ namespace UxcomexTest.Controllers
         // GET: Person/Create
         public IActionResult Create()
         {
-            return View();
+            var person = new Person { Name = "", PhoneNumber = "", CPF = "" };
+
+            return View(person);
         }
 
         // // POST: Person/Create
@@ -35,16 +37,24 @@ namespace UxcomexTest.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name,PhoneNumber,CPF")] Person person)
         {
-            // person.PhoneNumber = new string(person.PhoneNumber.Where(char.IsDigit).ToArray());
-            // person.CPF = new string(person.CPF.Where(char.IsDigit).ToArray());
-
             var connection = new SqlConnection(_connectionString);
 
-            var sql = "INSERT INTO Person OUTPUT INSERTED.Id VALUES (@Name, @PhoneNumber, @CPF)";
+            try
+            {
+                var searchSql = "SELECT * FROM Person WHERE Person.CPF = @CPF";
+                var personFound = await connection.QuerySingleAsync<Person>(searchSql, new { person.CPF });
 
-            var newId = await connection.QuerySingleAsync<int>(sql, new { person.Name, person.PhoneNumber, person.CPF });
+                return View(personFound);
+            }
+            catch (System.Exception)
+            {
+                var insertSql = "INSERT INTO Person OUTPUT INSERTED.Id VALUES (@Name, @PhoneNumber, @CPF)";
+                var newId = await connection.QuerySingleAsync<int>(insertSql, new { person.Name, person.PhoneNumber, person.CPF });
 
-            return RedirectToAction(nameof(Edit), new { id = newId });
+                return RedirectToAction(nameof(Edit), new { id = newId });
+
+                throw;
+            }
         }
 
         // GET: Person/Edit/id
@@ -59,15 +69,13 @@ namespace UxcomexTest.Controllers
             var result = await connection.QueryAsync<Person, Address, Person>(sql,
                 (person, address) =>
                 {
-                    // Se a pessoa ainda não foi registrada no dicionário, cria uma nova entrada
                     if (!personDictionary.TryGetValue(person.Id, out var personEntry))
                     {
                         personEntry = person;
-                        personEntry.Addresses = new List<Address>(); // Inicializa a lista de endereços
+                        personEntry.Addresses = new List<Address>();
                         personDictionary.Add(personEntry.Id, personEntry);
                     }
 
-                    // Se o endereço não for nulo, adiciona à lista de endereços da pessoa
                     if (address != null)
                     {
                         personEntry.Addresses.Add(address);
@@ -76,7 +84,7 @@ namespace UxcomexTest.Controllers
                     return personEntry;
                 },
                 new { id },
-                splitOn: "Id" // Indica onde a divisão entre Person e Address ocorre
+                splitOn: "Id"
             );
 
             if (result == null)
@@ -100,16 +108,25 @@ namespace UxcomexTest.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([Bind("Name,PhoneNumber,CPF")] Person person, int id)
         {
-            // person.PhoneNumber = new string(person.PhoneNumber.Where(char.IsDigit).ToArray());
-            // person.CPF = new string(person.CPF.Where(char.IsDigit).ToArray());
-
             var connection = new SqlConnection(_connectionString);
 
-            var sql = "UPDATE Person SET Name = @Name, PhoneNumber = @PhoneNumber, CPF = @CPF OUTPUT INSERTED.Id WHERE Person.Id = @Id";
+            try
+            {
+                var searchSql = "SELECT * FROM Person WHERE Person.CPF = @CPF";
+                var personFound = await connection.QuerySingleAsync<Person>(searchSql, new { person.CPF });
 
-            var newInfos = await connection.QuerySingleAsync<Person>(sql, new { person.Name, person.PhoneNumber, person.CPF, id });
+                return RedirectToAction(nameof(Edit), new { id });
+            }
+            catch (System.Exception)
+            {
+                var sql = "UPDATE Person SET Name = @Name, PhoneNumber = @PhoneNumber, CPF = @CPF OUTPUT INSERTED.Id WHERE Person.Id = @Id";
 
-            return RedirectToAction(nameof(Index));
+                var newInfos = await connection.QuerySingleAsync<Person>(sql, new { person.Name, person.PhoneNumber, person.CPF, id });
+
+                return RedirectToAction(nameof(Index));
+
+                throw;
+            }
         }
 
         // GET: Person/Delete/5
@@ -131,7 +148,6 @@ namespace UxcomexTest.Controllers
                 return NotFound();
                 throw;
             }
-
         }
 
         // POST: Person/Delete/5
