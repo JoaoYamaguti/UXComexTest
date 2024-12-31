@@ -1,0 +1,32 @@
+# Ignore the build output directories
+bin/
+obj/
+
+# Ignore configuration files for ASP.NET Core
+appsettings.Development.json
+appsettings.Local.json
+appsettings.*.json
+
+# Ignore publish directory
+publish/
+
+# Ignore files created by Visual Studio for Mac
+.vscode/
+.idea/
+
+# Ignore ASP.NET Core SSL certificates
+# (these are typically generated on first run)
+https/
+
+# Ignore npm and yarn package lock files (for front-end dependencies)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Ignore logs and database files
+logs/
+*.log
+*.db
+
+# Ignore dependency folders
+bower_components/

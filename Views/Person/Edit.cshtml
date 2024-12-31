@@ -1,0 +1,138 @@
+@model UxcomexTest.Models.PersonAddress;
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<section class="editPerson">
+
+    <h1 class="breadcrumbNav">
+        <a asp-action="Index">Listagem de Pessoas</a>
+        <i class="bi bi-chevron-compact-right text-secondary"></i>
+        <span>Pessoa</span>
+        <i class="bi bi-chevron-compact-right text-secondary"></i>
+        Edição
+    </h1>
+
+    <hr />
+
+    <form id="formPerson" asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="person.Id" />
+        <div class="form-group mb-3">
+            <label asp-for="person.Name" class="control-label"></label>
+            <input asp-for="person.Name" class="form-control" />
+            <span asp-validation-for="person.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="person.PhoneNumber" class="control-label"></label>
+            <input asp-for="person.PhoneNumber" class="form-control" id="phoneNumber" />
+            <span asp-validation-for="person.PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="person.CPF" class="control-label"></label>
+            <input asp-for="person.CPF" class="form-control" id="CPF" />
+            <span asp-validation-for="person.CPF" class="text-danger"></span>
+        </div>
+        <div class="form-group text-end mb-3">
+            <button id="subEditPerson" type="submit" value="Save" class="btnConfirme">Save</button>
+        </div>
+    </form>
+    <hr>
+
+    <!-- Button trigger modal -->
+        <button type="button" class="btnPage" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            +Endereço
+        </button>
+
+    @if (Model.person.Addresses != null)
+    {
+        <table class="excel">
+            <thead>
+                <tr>
+                    <th>Endereço</th>
+                    <th>Cidade</th>
+                    <th>Estado</th>
+                    <th>CEP</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var address in Model.person.Addresses)
+                {
+                    <tr>
+                        <td>@address.Name</td>
+                        <td>@address.City</td>
+                        <td>@address.State</td>
+                        <td>@address.CEP</td>
+                        <td>
+                            <a asp-controller="Address" asp-action="Edit" asp-route-id="@address.Id"
+                                class="editLink text-decoration-none">
+                                <i class="bi bi-pencil-fill fs-5"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-controller="Address" asp-action="Delete" asp-route-id="@address.Id"
+                                class="deleteLink text-decoration-none">
+                                <i class="bi bi-x-lg fs-5"></i>
+                            </a>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="breadcrumbNav">
+                    <span>Endereço</span>
+                    <i class="bi bi-chevron-compact-right text-secondary"></i>
+                    Cadastro
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="formAddress" asp-controller="Address" asp-action="Create" asp-route-id="@Model.person.Id"
+                class="p-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group mb-3">
+                    <label asp-for="address.CEP" class="control-label"></label>
+                    <div class="d-flex flex-row">
+                        <input asp-for="address.CEP" class="form-control" id="cep" />
+                        <button type="button" class="btn btn-primary" id="cepSearch">Procurar</button>
+                    </div>
+                    <span asp-validation-for="address.CEP" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="address.Name" class="control-label"></label>
+                    <input asp-for="address.Name" class="form-control" id="name" />
+                    <span asp-validation-for="address.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="address.City" class="control-label"></label>
+                    <input asp-for="address.City" class="form-control" id="city" />
+                    <span asp-validation-for="address.City" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="address.State" class="control-label"></label>
+                    <input asp-for="address.State" class="form-control" id="state" />
+                    <span asp-validation-for="address.State" class="text-danger"></span>
+                </div>
+                <div class="form-group text-end">
+                    <button type="submit" class="btn btn-primary" value="Create">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

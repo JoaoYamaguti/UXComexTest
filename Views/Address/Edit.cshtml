@@ -1,0 +1,56 @@
+@model UxcomexTest.Models.Address;
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 class="breadcrumbNav">
+    <a asp-controller="Person" asp-action="Edit" asp-route-id="@Model.PersonId">Person</a>
+    <i class="bi bi-chevron-compact-right text-secondary"></i>
+    <span>Endereço</span>
+    <i class="bi bi-chevron-compact-right text-secondary"></i>
+    Edição
+</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        <form id="formAddress" asp-action="Edit" onsubmit="cleanAddressForm()">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group mb-3">
+                <label asp-for="CEP" class="control-label"></label>
+                <div class="d-flex flex-row">
+                    <input asp-for="CEP" class="form-control" id="cep" oninput="maskCEP(this.value)" />
+                    <button type="button" class="btn btn-primary" id="cepSearch" onclick="pesquisacep(this.value)">Procurar</button>
+                </div>
+                <span asp-validation-for="CEP" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" id="name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" id="city" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="State" class="control-label"></label>
+                <input asp-for="State" class="form-control" id="state" />
+                <span asp-validation-for="State" class="text-danger"></span>
+            </div>
+            <div class="form-group text-end">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
