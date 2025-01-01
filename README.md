@@ -25,13 +25,50 @@ Antes de rodar o projeto, verifique se você tem as seguintes ferramentas instal
 - [Dotnet SDK](https://dotnet.microsoft.com/download) (versão 6 ou superior)
 - [SQL Server](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads) 
 
+## Como Executar o Projeto
+
+1. **Clone o repositório**
+
+   ```bash
+   git clone https://github.com/JoaoYamaguti/UxComexTest.git
+   cd UxComexTest
+   ```
+
+3. **Configure a Conexão com o Banco de Dados**
+
+No arquivo appsettings.json, configure a string de conexão para o banco de dados:
+
+```bash
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost;Database=DBUxcomexTest;User Id=usuario;Password=senha;"
+  }
+}
+```
+
+4. **Execute a aplicação**
+
+Se estiver utilizando a linha de comando, execute o comando abaixo para rodar o projeto:
+
+```bash
+dotnet run
+```
+
+Ou, se preferir, pode rodar o projeto diretamente pelo Visual Studio Code utilizando o comando (Crtl + F5).
+
+5. **Acessando a aplicação**
+
+Abra seu navegador e acesse o endpoint da aplicação:
+
+```bash
+http://localhost:5257
+```
+
 ## Como Configurar o Banco de Dados
 
 Este projeto utiliza SQL Server como banco de dados relacional. Para configurar o banco de dados, você deve executar o script SQL que está disponível no repositório.
 
-1. Localize o script do banco de dados
-
-O script SQL pode ser encontrado no diretório /Migrations. Este script cria as tabelas necessárias para o funcionamento do microserviço.
+1. Localize o script do banco de dados, que pode ser encontrado no diretório ~/.
 
 2. Execute o script no banco de dados
 
@@ -50,54 +87,6 @@ O script criará o banco de dados e tabelas e realizará alguns cadastros.
 
 Após a execução do script, as tabelas devem estar configuradas no banco de dados. Agora, você pode continuar a execução do projeto.
 
-## Como Executar o Projeto
-
-1. **Clone o repositório**
-
-   ```bash
-   git clone https://github.com/JoaoYamaguti/UxComexTest.git
-   cd nome-do-repositorio
-   ```
-2. **Instale as dependências**
-
-Caso esteja utilizando o Visual Studio ou VS Code, basta restaurar os pacotes NuGet:
-
-```bash
-dotnet restore
-```
-
-3. **Configure a Conexão com o Banco de Dados**
-
-No arquivo appsettings.json, configure a string de conexão para o banco de dados:
-
-```bash
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Database=nome_do_banco;User Id=usuario;Password=senha;"
-  }
-}
-```
-
-4. **Execute a aplicação**
-
-Se estiver utilizando a linha de comando, execute o comando abaixo para rodar o projeto:
-
-```bash
-dotnet run
-```
-
-Ou, se preferir, pode rodar o projeto diretamente pelo Visual Studio.
-
-5. **Acessando a aplicação**
-
-Abra seu navegador e acesse o endpoint da aplicação:
-
-```bash
-http://localhost:5000
-```
-
-O microserviço estará rodando e você poderá acessar as funcionalidades implementadas (por exemplo, CRUD de entidades).
-
 ## Estrutura do Projeto
 A estrutura do projeto é organizada da seguinte forma:
 
@@ -105,20 +94,13 @@ A estrutura do projeto é organizada da seguinte forma:
 /src
   /Controllers        # Contém os controladores que gerenciam as requisições HTTP
   /Models             # Contém os modelos de dados utilizados nas requisições e respostas
-  /Services           # Lógica de negócio e regras do microserviço
-  /Repositories       # Camada de acesso ao banco de dados utilizando Dapper
-  /Migrations         # Scripts para migração do banco de dados
   /Views              # Views MVC
   /wwwroot            # Arquivos estáticos (CSS, JS, imagens, etc.)
 /appsettings.json     # Configurações do projeto
 /Program.cs           # Arquivo principal para configuração do pipeline da aplicação
 /Startup.cs           # Configuração de serviços e middleware
+/database_project.sql     # Script para criação do banco de dados
 ```
-
-Licença
-Este projeto está licenciado sob a Licença MIT - veja o arquivo LICENSE para mais detalhes.
-
-javascript
-Copiar código
-
-Este arquivo `README.md` agora reflete as mudanças solicitadas, incluindo a parte do Docker removida e a adição de um guia para a execução do script SQL para configurar o banco de dados. Certifique-se de ajustar os detalhes de conexão e o nome do banco conforme a sua implementação específica.
+## 
+ 
+Grato pela oportunidade :)
